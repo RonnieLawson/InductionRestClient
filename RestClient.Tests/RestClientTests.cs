@@ -19,7 +19,7 @@ namespace RestClient.Tests
             {
                 //var calculator = Substitute.For<ICalculator>();
                 var credentialdManager = Substitute.For<ICredentialsManager>();
-                _restClient = new InductionClient(credentialdManager);
+                _restClient = new InductionClient();
             }
 
             [Test]
@@ -28,8 +28,6 @@ namespace RestClient.Tests
                 Assert.That(_restClient.GetType(), Is.EqualTo(typeof(InductionClient)));
             }
         }
-
-
 
         [TestFixture]
         public class GivenARestClientWithoutASession
@@ -40,10 +38,8 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCheckingCredentials()
             {
-                
                 var credentialsManager = new CredentialsManager();
-                
-                _client = new InductionClient(credentialsManager);
+                _client = new InductionClient();
                 _response = _client.Authenticate();
             }
 
@@ -54,7 +50,7 @@ namespace RestClient.Tests
             }
 
             [Test]
-            public void ThenTheSessionIDIsStored()
+            public void ThenTheSessionIdIsStored()
             {
                 Assert.That(_client.SessionId, Is.Not.EqualTo(Guid.Empty));
             }

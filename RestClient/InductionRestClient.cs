@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
-using System.Net.Http;
 using RestClient;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -20,24 +19,15 @@ namespace InductionRestClient
             set { _sessionId = value; }
         }
 
-        private HttpClient _client;
         private Guid _sessionId;
 
-        public InductionClient(ICredentialsManager credentialsManager)
-        {
-            CredentialsManager = credentialsManager;
-        }
-
-
-
-        public HttpWebResponse SendMessage(CredentialsManager credentialsManager, SMSMessage smsMessage)
+        public HttpWebResponse SendMessage()
         {
             throw new NotImplementedException();
         }
 
         public HttpStatusCode Authenticate()
         {
-
             var restClient = new RestSharp.RestClient
             {
                 Authenticator =
