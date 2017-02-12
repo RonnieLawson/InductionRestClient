@@ -29,7 +29,7 @@ namespace RestClient.Tests
             }
         }
 
-       [TestFixture, Ignore("setting up")]
+      /*  [TestFixture]
         public class GivenARestClientWithoutASession
         {
             private RestAPIClient _client;
@@ -56,6 +56,6 @@ namespace RestClient.Tests
             {
                 Assert.That(_client.SessionId, Is.Not.EqualTo(Guid.Empty));
             }
-        }
+        }*/
     }
 }

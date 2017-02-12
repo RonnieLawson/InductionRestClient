@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageSender.cs" />
     <Compile Include="Models\AuthenticationResponse.cs" />
     <Compile Include="Interfaces\IRestAuthenticator.cs" />
     <Compile Include="RestAuthenticator.cs" />
