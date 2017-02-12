@@ -34,7 +34,7 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCallingGetAuthenticate()
             {
-                _restAuthenticator = new InductionRestAPI.RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "V0lDbllZ8YRb", "https://api.esendex.com", "/v1.0/session/constructor");
+                _restAuthenticator = new InductionRestAPI.RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "", "https://api.esendex.com", "/v1.0/session/constructor");
                 _result = _restAuthenticator.Authenticate();
             }
 
