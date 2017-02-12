@@ -101,13 +101,4 @@ namespace RestClient.Tests
             }
         }
     }
-
-    [TestFixture]
-    public class DeserialisationTests
-    {
-        [OneTimeSetUp]
-        public void SetUp()
-        {
-        }
-    }
 }

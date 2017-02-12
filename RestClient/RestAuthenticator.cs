@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Text;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
@@ -43,7 +42,7 @@ namespace InductionRestAPI
 
         public string GetEncodedSession()
         {
-            return SessionId == null ? null : Convert.ToBase64String(Encoding.ASCII.GetBytes(SessionId.ToString()));
+            return SessionId == null ? null : Utility.Encode(SessionId.ToString());
         }
     }
 }
