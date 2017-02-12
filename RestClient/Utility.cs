@@ -13,7 +13,7 @@ namespace InductionRestAPI
             return Convert.ToBase64String(Encoding.ASCII.GetBytes(toEncode));
         }
 
-        public static string GetSecret(string secretDirectory, string secret)
+        public static string GetSecret(string secret, string secretDirectory = @"C:\secrets\")
         {
             var xml = XDocument.Load(secretDirectory + @"default.secret");
             return xml.Root.Descendants("password").First().Value;
