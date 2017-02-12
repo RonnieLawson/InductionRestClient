@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net;
 using InductionRestAPI;
+using InductionRestAPI.Interfaces;
 using NUnit.Framework;
+using NSubstitute;
 
 namespace RestClient.Tests
 {
@@ -36,8 +38,11 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCheckingCredentials()
             {
-                //_client = new RestAPIClient(restAuthenticator);
-                
+                var restAuthenticator = Substitute.For<IRestAuthenticator>();
+                restAuthenticator.IsAuthenticated.Returns(true);
+                restAuthenticator.GetEncodedSession().Returns("abcdef");
+
+                _client = new RestAPIClient(restAuthenticator);
             }
 
             [Test]

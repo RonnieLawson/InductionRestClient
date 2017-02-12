@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using InductionRestAPI.Interfaces;
+using InductionRestAPI.Models;
 using RestSharp;
 using RestSharp.Authenticators;
-using RestSharp.Deserializers;
 
 namespace InductionRestAPI
 {
@@ -29,22 +28,17 @@ namespace InductionRestAPI
 
         public HttpStatusCode Authenticate()
         {
-            var request = new RestRequest {Method = Method.POST};
-            request.AddHeader("Accept", "application/json");
+            var request = new RestRequest { Method = Method.POST };
+            request.AddHeader("Accept", "application/xml");
             request.Resource = _requestResource;
 
-            var response = _restClient.Execute(request);
+            var response = _restClient.Execute<AuthenticationResponse>(request);
 
             if (response.StatusCode != HttpStatusCode.OK)
                 return response.StatusCode;
+            SessionId = response.Data.id;
 
-            SessionId = ParseSessionFromResponse(response);
             return response.StatusCode;
-        }
-
-        public Guid ParseSessionFromResponse(IRestResponse response)
-        {
-            return new JsonDeserializer().Deserialize<Dictionary<string, Guid>>(response)["id"];
         }
 
         public string GetEncodedSession()

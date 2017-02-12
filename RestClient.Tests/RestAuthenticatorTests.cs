@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Text;
+using InductionRestAPI;
+using InductionRestAPI.Models;
 using NUnit.Framework;
+using RestSharp;
+using RestSharp.Deserializers;
 
 namespace RestClient.Tests
 {
@@ -95,6 +99,15 @@ namespace RestClient.Tests
             {
                 Assert.That(_restAuthenticator.GetEncodedSession(), Is.Null);
             }
+        }
+    }
+
+    [TestFixture]
+    public class DeserialisationTests
+    {
+        [OneTimeSetUp]
+        public void SetUp()
+        {
         }
     }
 }

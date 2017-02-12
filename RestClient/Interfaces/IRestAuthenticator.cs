@@ -8,7 +8,6 @@ namespace InductionRestAPI.Interfaces
     {
         bool IsAuthenticated { get; }
         HttpStatusCode Authenticate();
-        Guid ParseSessionFromResponse(IRestResponse response);
         string GetEncodedSession();
     }
 }
