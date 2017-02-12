@@ -3,7 +3,7 @@ using System.Net;
 using System.Text;
 using NUnit.Framework;
 
-namespace InductionClient.RestAuthenticator.Tests
+namespace RestClient.Tests
 {
     [TestFixture]
     public class RestAuthenticatorTests
@@ -11,12 +11,12 @@ namespace InductionClient.RestAuthenticator.Tests
         [TestFixture]
         public class GivenAnAuthenticator
         {
-            private RestAuthenticator _restAuthenticator;
+            private InductionRestAPI.RestAuthenticator _restAuthenticator;
 
             [OneTimeSetUp]
             public void WhenCreatingTheAuthenticator()
             {
-                _restAuthenticator = new RestAuthenticator("anything","anything", "Http://nowhere.com", "");
+                _restAuthenticator = new InductionRestAPI.RestAuthenticator("anything","anything", "Http://nowhere.com", "");
             }
 
         }
@@ -24,13 +24,13 @@ namespace InductionClient.RestAuthenticator.Tests
         [TestFixture]
         public class GivenValidCredentials
         {
-            private RestAuthenticator _restAuthenticator;
+            private InductionRestAPI.RestAuthenticator _restAuthenticator;
             private HttpStatusCode _result;
 
             [OneTimeSetUp]
             public void WhenCallingGetAuthenticate()
             {
-                _restAuthenticator = new RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "V0lDbllZ8YRb", "https://api.esendex.com", "/v1.0/session/constructor");
+                _restAuthenticator = new InductionRestAPI.RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "V0lDbllZ8YRb", "https://api.esendex.com", "/v1.0/session/constructor");
                 _result = _restAuthenticator.Authenticate();
             }
 
@@ -62,13 +62,13 @@ namespace InductionClient.RestAuthenticator.Tests
         [TestFixture]
         public class GivenInvalidCredentials
         {
-            private RestAuthenticator _restAuthenticator;
+            private InductionRestAPI.RestAuthenticator _restAuthenticator;
             private HttpStatusCode _result;
 
             [OneTimeSetUp]
             public void WhenCallingGetAuthenticate()
             {
-                _restAuthenticator = new RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword", "https://api.esendex.com", "/v1.0/session/constructor");
+                _restAuthenticator = new InductionRestAPI.RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword", "https://api.esendex.com", "/v1.0/session/constructor");
                 _result = _restAuthenticator.Authenticate();
             }
 

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Net;
-using InductionClient.RestAuthenticator;
-using NSubstitute;
+using InductionRestAPI;
 using NUnit.Framework;
-using InductionRestClient;
 
 namespace RestClient.Tests
 {
@@ -14,34 +11,33 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenARestClient
         {
-            private InductionRestClient.InductionClient _restClient;
+            private RestAPIClient _restClient;
 
             [OneTimeSetUp]
             public void WhenCreatingTheRestClient()
             {
 
-                _restClient = new InductionRestClient.InductionClient(new RestAuthenticator("","", "http://test/.com", ""));
+                _restClient = new RestAPIClient(new RestAuthenticator("","", "http://test/.com", ""));
             }
 
             [Test]
             public void ThenTheClientIsCreated()
             {
-                Assert.That(_restClient.GetType(), Is.EqualTo(typeof(InductionRestClient.InductionClient)));
+                Assert.That(_restClient.GetType(), Is.EqualTo(typeof(RestAPIClient)));
             }
         }
 
-      /*  [TestFixture]
+       [TestFixture, Ignore("setting up")]
         public class GivenARestClientWithoutASession
         {
-            private InductionRestClient.InductionClient _client;
+            private RestAPIClient _client;
             private HttpStatusCode _response;
 
             [OneTimeSetUp]
             public void WhenCheckingCredentials()
             {
-                var restAuthenticator = Substitute.For<IRestAuthenticator>();
-                _client = new InductionRestClient.InductionClient(restAuthenticator);
-                _response = _client.Authenticate();
+                //_client = new RestAPIClient(restAuthenticator);
+                
             }
 
             [Test]
@@ -55,6 +51,6 @@ namespace RestClient.Tests
             {
                 Assert.That(_client.SessionId, Is.Not.EqualTo(Guid.Empty));
             }
-        }*/
+        }
     }
 }

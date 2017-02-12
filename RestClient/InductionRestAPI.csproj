@@ -7,8 +7,8 @@
     <ProjectGuid>{15479210-5FB5-43C5-ACCE-4242ADBEF7E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InductionRestClient</RootNamespace>
-    <AssemblyName>InductionRestClient</AssemblyName>
+    <RootNamespace>InductionRestAPI</RootNamespace>
+    <AssemblyName>InductionRestAPI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,22 +45,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InductionRestClient.cs" />
+    <Compile Include="Interfaces\IRestAuthenticator.cs" />
+    <Compile Include="RestAuthenticator.cs" />
+    <Compile Include="RestAPIClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMSMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RestAuthenticator\InductionClient.RestAuthentication.csproj">
-      <Project>{274385E1-AA51-481C-8939-AA00621875FB}</Project>
-      <Name>InductionClient.RestAuthentication</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

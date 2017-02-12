@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Net;
-using InductionClient.RestAuthenticator;
-using RestClient;
-using RestSharp;
-using RestSharp.Authenticators;
-using RestSharp.Deserializers;
+using InductionRestAPI.Interfaces;
 
-namespace InductionRestClient
+namespace InductionRestAPI
 {
-    public class InductionClient
+    public class RestAPIClient
     {
         private readonly IRestAuthenticator _restAuthenticator;
 
@@ -22,7 +16,7 @@ namespace InductionRestClient
 
         private Guid _sessionId;
 
-        public InductionClient(IRestAuthenticator restAuthenticator)
+        public RestAPIClient(IRestAuthenticator restAuthenticator)
         {
             _restAuthenticator = restAuthenticator;
         }
@@ -31,7 +25,5 @@ namespace InductionRestClient
         {
             throw new NotImplementedException();
         }
-
-       
     }
 }

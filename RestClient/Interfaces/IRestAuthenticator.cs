@@ -2,7 +2,7 @@
 using System.Net;
 using RestSharp;
 
-namespace InductionClient.RestAuthenticator
+namespace InductionRestAPI.Interfaces
 {
     public interface IRestAuthenticator
     {

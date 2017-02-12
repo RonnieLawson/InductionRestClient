@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
+using InductionRestAPI.Interfaces;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
 
-namespace InductionClient.RestAuthenticator
+namespace InductionRestAPI
 {
     public class RestAuthenticator : IRestAuthenticator
     {
         public bool IsAuthenticated => SessionId != null;
         public Guid? SessionId { get; private set; }
 
-        private RestClient _restClient;
+        private RestSharp.RestClient _restClient;
         private string _requestResource;
 
         public RestAuthenticator(string username, string password, string apiBaseUri, string requestResource)
         {
             _requestResource = requestResource;
-            _restClient = new RestClient()
+            _restClient = new RestSharp.RestClient()
             {
                 Authenticator = new HttpBasicAuthenticator(username, password),
                 BaseUrl = new Uri(apiBaseUri)
