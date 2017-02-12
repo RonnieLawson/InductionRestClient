@@ -39,6 +39,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,10 +53,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RestAuthenticator\InductionClient.RestAuthentication.csproj">
+      <Project>{274385E1-AA51-481C-8939-AA00621875FB}</Project>
+      <Name>InductionClient.RestAuthentication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestClient\InductionClient.csproj">
       <Project>{15479210-5fb5-43c5-acce-4242adbef7e1}</Project>
       <Name>InductionClient</Name>

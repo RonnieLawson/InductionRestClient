@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CredentialsManager.cs" />
     <Compile Include="InductionRestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMSMessage.cs" />
@@ -56,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RestAuthenticator\InductionClient.RestAuthentication.csproj">
+      <Project>{274385E1-AA51-481C-8939-AA00621875FB}</Project>
+      <Name>InductionClient.RestAuthentication</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
