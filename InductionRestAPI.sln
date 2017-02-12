@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InductionRestAPI", "RestClient\InductionRestAPI.csproj", "{15479210-5FB5-43C5-ACCE-4242ADBEF7E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InductionRestClient.Tests", "RestClient.Tests\InductionRestClient.Tests.csproj", "{C902E2F5-8821-483A-B87F-362331655D68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InductionRestAPI.Tests", "RestClient.Tests\InductionRestAPI.Tests.csproj", "{C902E2F5-8821-483A-B87F-362331655D68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
