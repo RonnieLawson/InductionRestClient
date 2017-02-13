@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Net;
-using System.Xml.Serialization;
 using InductionRestAPI.Interfaces;
+using InductionRestAPI.Models;
 using RestSharp;
-using RestSharp.Deserializers;
 using RestSharp.Serializers;
 
 namespace InductionRestAPI
@@ -46,56 +45,5 @@ namespace InductionRestAPI
 
             return response.StatusCode;
         }
-    }
-
-    [XmlRoot("messages")]
-    public class SendMessageBody
-    {
-        public SendMessageBody(string accountReference, string numberToSendTo, string messageToSend)
-        {
-            Accountreference = accountReference;
-            Message = new Message(numberToSendTo, messageToSend);
-        }
-
-        [XmlElement("accountreference")]
-        public string Accountreference { get; set; }
-        [XmlElement("message")]
-        public Message Message { get; set; }
-
-        public SendMessageBody()
-        { }
-    }
-
-    [XmlRoot("message")]
-    public class Message
-    {
-        public Message(string numberToSendTo, string messageToSend)
-        {
-            To = numberToSendTo;
-            Body = messageToSend;
-        }
-
-        [XmlElement("to")]
-        public string To { get; set; }
-        [XmlElement("body")]
-        public string Body { get; set; }
-
-        public Message()
-        { }
-    }
-
-    [DeserializeAs(Name = "messageheaders")]
-    public class SendMessageResponse
-    {
-        public Guid BatchId { get; set; }
-        public MessageHeader MessageHeader { get; set; }
-
-    }
-
-    [DeserializeAs(Name = "messageheader")]
-    public class MessageHeader
-    {
-        public string Uri { get; set; }
-        public Guid Id { get; set; }
     }
 }
