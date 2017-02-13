@@ -15,7 +15,7 @@ namespace InductionRestAPI
         private RestSharp.RestClient _restClient;
         private string _requestResource;
 
-        public RestAuthenticator(string username, string password, string apiBaseUri, string requestResource)
+        public RestAuthenticator(string apiBaseUri, string requestResource, string username, string password)
         {
             _requestResource = requestResource;
             _restClient = new RestSharp.RestClient()
@@ -42,6 +42,7 @@ namespace InductionRestAPI
 
         public string GetEncodedSession()
         {
+
             return SessionId == null ? null : Utility.Encode(SessionId.ToString());
         }
     }

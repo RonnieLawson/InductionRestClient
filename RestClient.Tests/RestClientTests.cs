@@ -19,7 +19,7 @@ namespace RestClient.Tests
             public void WhenCreatingTheRestClient()
             {
 
-                _restClient = new RestAPIClient(new RestAuthenticator("","", "http://test/.com", ""));
+                _restClient = new RestAPIClient(new RestAuthenticator("http://test/.com", "", "", ""));
             }
 
             [Test]

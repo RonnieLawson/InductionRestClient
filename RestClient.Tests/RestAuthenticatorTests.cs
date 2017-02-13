@@ -20,7 +20,7 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCreatingTheAuthenticator()
             {
-                _restAuthenticator = new InductionRestAPI.RestAuthenticator("anything","anything", "Http://nowhere.com", "");
+                _restAuthenticator = new InductionRestAPI.RestAuthenticator("Http://nowhere.com", "", "anything", "anything");
             }
 
         }
@@ -35,7 +35,7 @@ namespace RestClient.Tests
             public void WhenCallingGetAuthenticate()
             {
                 var password = Utility.GetSecret("password");
-                _restAuthenticator = new InductionRestAPI.RestAuthenticator("ronnie.lawson+induction@esendex.com", password, "https://api.esendex.com", "/v1.0/session/constructor");
+                _restAuthenticator = new RestAuthenticator("https://api.esendex.com", "/v1.0/session/constructor", "ronnie.lawson+induction@esendex.com", password);
                 _result = _restAuthenticator.Authenticate();
             }
 
@@ -73,7 +73,7 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCallingGetAuthenticate()
             {
-                _restAuthenticator = new InductionRestAPI.RestAuthenticator("ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword", "https://api.esendex.com", "/v1.0/session/constructor");
+                _restAuthenticator = new InductionRestAPI.RestAuthenticator("https://api.esendex.com", "/v1.0/session/constructor", "ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword");
                 _result = _restAuthenticator.Authenticate();
             }
 
