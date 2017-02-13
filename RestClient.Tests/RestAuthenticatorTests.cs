@@ -73,7 +73,7 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCallingGetAuthenticate()
             {
-                _restAuthenticator = new InductionRestAPI.RestAuthenticator("https://api.esendex.com", "/v1.0/session/constructor", "ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword");
+                _restAuthenticator = new RestAuthenticator("https://api.esendex.com", "/v1.0/session/constructor", "ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword");
                 _result = _restAuthenticator.Authenticate();
             }
 
@@ -90,7 +90,7 @@ namespace RestClient.Tests
             }
 
             [Test]
-            public void ThenSessionIDIsStored()
+            public void ThenSessionIdIsStored()
             {
                 Assert.That(_restAuthenticator.SessionId, Is.Null);
             }

@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageSenderTests.cs" />
+    <Compile Include="MessageStatusCheckerTests.cs" />
     <Compile Include="RestAuthenticatorTests.cs" />
     <Compile Include="RestClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

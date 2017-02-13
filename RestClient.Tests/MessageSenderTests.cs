@@ -3,7 +3,6 @@ using InductionRestAPI;
 using InductionRestAPI.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
-using RestSharp.Authenticators;
 
 namespace RestClient.Tests
 {
@@ -37,7 +36,6 @@ namespace RestClient.Tests
             [OneTimeSetUp]
             public void WhenCallingSend()
             {
-                //var restAuthenticator = new RestAuthenticator("Ronnie.Lawson+Induction@esendex.com", Utility.GetSecret("password"), "https://api.esendex.com", "/v1.0/session/constructor");
                 _restAuthenticator = Substitute.For<IRestAuthenticator>();
                 _restAuthenticator.IsAuthenticated.Returns(false);
 
@@ -58,15 +56,14 @@ namespace RestClient.Tests
             {
                 _restAuthenticator.Received(1).GetEncodedSession();
             }
-
-
         }
 
-        [TestFixture]
+        [TestFixture, Category("Costly")]
         public class GivenAMessageToSenWithValidCredentialsd
         {
             private IRestAuthenticator _restAuthenticator;
             private HttpStatusCode _result;
+            private MessageSender _messageSender;
 
             [OneTimeSetUp]
             public void WhenCallingSend()
@@ -74,16 +71,34 @@ namespace RestClient.Tests
                 var ApiBaseUrl = "https://api.esendex.com";
                 _restAuthenticator = new RestAuthenticator(ApiBaseUrl, "/v1.0/session/constructor", "Ronnie.Lawson+Induction@esendex.com", Utility.GetSecret("password"));
 
-                var messageSender = new MessageSender(ApiBaseUrl, "/v1.0/messagedispatcher", _restAuthenticator);
-                var numberToSendTo = "07906701458";
-                var messageToSend = "I love you";
-                _result = messageSender.SendMessage(numberToSendTo, messageToSend, "EX0224195");
+                _messageSender = new MessageSender(ApiBaseUrl, "/v1.0/messagedispatcher", _restAuthenticator);
+                var numberToSendTo = "07590360247";
+                var messageToSend = "Test Message";
+                _result = _messageSender.SendMessage(numberToSendTo, messageToSend, "EX0224195");
             }
 
             [Test]
             public void ThenItReturnsAccepted()
             {
                 Assert.That(_result, Is.EqualTo(HttpStatusCode.OK));
+            }
+
+            [Test]
+            public void ThenTheResponseIsPopulated()
+            {
+                Assert.That(_messageSender.MessageSenderResponse, Is.Not.Null);
+            }
+
+            [Test]
+            public void ThenTheBatchIdIsPopulated()
+            {
+                Assert.That(_messageSender.MessageSenderResponse.BatchId, Is.Not.Null);
+            }
+
+            [Test]
+            public void ThenTheMEssageHeaderIsPopulated()
+            {
+                Assert.That(_messageSender.MessageSenderResponse.MessageHeader, Is.Not.Null);
             }
         }
     }

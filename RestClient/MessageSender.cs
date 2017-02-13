@@ -12,12 +12,13 @@ namespace InductionRestAPI
         private readonly IRestAuthenticator _restAuthenticator;
         private readonly string _requestResource;
         private RestSharp.RestClient _restClient;
+        public SendMessageResponse MessageSenderResponse { get; private set; }
 
         public MessageSender(string apiBaseUri, string requestResource, IRestAuthenticator restAuthenticator)
         {
             _restAuthenticator = restAuthenticator;
             _requestResource = requestResource;
-            _restClient = new RestSharp.RestClient()
+            _restClient = new RestClient()
             {
                 BaseUrl = new Uri(apiBaseUri)
             };
@@ -43,6 +44,8 @@ namespace InductionRestAPI
 
             var response = _restClient.Execute<SendMessageResponse>(request);
 
+            if (response.StatusCode == HttpStatusCode.OK)
+                MessageSenderResponse = response.Data;
             return response.StatusCode;
         }
     }
