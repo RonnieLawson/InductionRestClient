@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiBase.cs" />
     <Compile Include="MessageStatusChecker.cs" />
     <Compile Include="Models\MessageHeader.cs" />
     <Compile Include="Models\Message.cs" />

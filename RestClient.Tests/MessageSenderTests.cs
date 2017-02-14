@@ -18,7 +18,7 @@ namespace RestClient.Tests
             public void WhenCreating()
             {
                 var authenticator = Substitute.For<IRestAuthenticator>();
-                _messageSender = new MessageSender("http://someting.com", "", authenticator);
+                _messageSender = new MessageSender("", authenticator);
             }
 
             [Test]
@@ -39,16 +39,17 @@ namespace RestClient.Tests
                 _restAuthenticator = Substitute.For<IRestAuthenticator>();
                 _restAuthenticator.IsAuthenticated.Returns(false);
 
-                var messageSender = new MessageSender("http://someting.com", "", _restAuthenticator);
-                var numberToSendTo = "07590360247";
-                var messageToSend = "Test";
-                messageSender.SendMessage(numberToSendTo, messageToSend, "");
+                var messageSender = new MessageSender("", _restAuthenticator)
+                {
+                    MessageToSend = new Message("07590360247", "Test")
+                };
+                messageSender.Execute();
             }
 
             [Test]
             public void ThenAuthenticateIsCalled()
             {
-                _restAuthenticator.Received(1).Authenticate();
+                _restAuthenticator.Received(1).Execute();
             }
 
             [Test]
@@ -71,10 +72,12 @@ namespace RestClient.Tests
                 var ApiBaseUrl = "https://api.esendex.com";
                 _restAuthenticator = new RestAuthenticator(ApiBaseUrl, "/v1.0/session/constructor", "Ronnie.Lawson+Induction@esendex.com", Utility.GetSecret("password"));
 
-                _messageSender = new MessageSender(ApiBaseUrl, "/v1.0/messagedispatcher", _restAuthenticator);
-                var numberToSendTo = "07590360247";
-                var messageToSend = "Test Message";
-                _result = _messageSender.SendMessage(numberToSendTo, messageToSend, "EX0224195");
+                _messageSender = new MessageSender("/v1.0/messagedispatcher", _restAuthenticator)
+                {
+                    MessageToSend = new Message("07590360247", "Test Message"),
+                    AccountReference = "EX0224195"
+                };
+                _result = _messageSender.Execute();
             }
 
             [Test]

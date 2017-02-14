@@ -1,48 +1,28 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
-using RestSharp.Serializers;
 
 namespace InductionRestAPI
 {
-    public class MessageStatusChecker
+    public class MessageStatusChecker: ApiBase
     {
-        private readonly string _requestResource;
-        private readonly IRestAuthenticator _authenticator;
-        private RestClient _restClient;
+
         public MessageHeader MessageHeader { get; private set; }
 
         public bool MessageStatusResponse { get; set; }
 
-        public MessageStatusChecker(string apiBaseUri, string requestResource, IRestAuthenticator authenticator)
+        public MessageStatusChecker(string requestResource, IRestAuthenticator authenticator)
         {
-            _requestResource = requestResource;
-            _authenticator = authenticator;
-            _restClient = new RestClient()
-            {
-                BaseUrl = new Uri(apiBaseUri)
-            };
-
+            RequestResource = requestResource;
+            Authenticator = authenticator;
         }
 
-        public HttpStatusCode CheckMessageStatus(Guid messageId)
+        public HttpStatusCode Execute()
         {
-            if (!_authenticator.IsAuthenticated)
-                _authenticator.Authenticate();
-            var encodedSession = _authenticator.GetEncodedSession();
-            var request = new RestRequest
-            {
-                Method = Method.GET,
-                RequestFormat = DataFormat.Xml,
-                XmlSerializer = new DotNetXmlSerializer()
-            };
+            var request = SetupRequest(Method.GET, RequestResource);
 
-            request.AddHeader("Authorization", $"Basic {encodedSession}");
-            request.Resource = _requestResource;
-
-            var response = _restClient.Execute<MessageHeader>(request);
+            var response = RestClient.Execute<MessageHeader>(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
                 MessageHeader = response.Data;

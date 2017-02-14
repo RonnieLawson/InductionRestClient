@@ -25,7 +25,7 @@ namespace InductionRestAPI
             };
         }
 
-        public HttpStatusCode Authenticate()
+        public HttpStatusCode Execute()
         {
             var request = new RestRequest { Method = Method.POST };
             request.AddHeader("Accept", "application/xml");

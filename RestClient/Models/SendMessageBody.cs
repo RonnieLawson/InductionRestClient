@@ -5,10 +5,10 @@ namespace InductionRestAPI
     [XmlRoot("messages")]
     public class SendMessageBody
     {
-        public SendMessageBody(string accountReference, string numberToSendTo, string messageToSend)
+        public SendMessageBody(string accountReference, Message message)
         {
             Accountreference = accountReference;
-            Message = new Message(numberToSendTo, messageToSend);
+            Message = message;
         }
 
         [XmlElement("accountreference")]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using InductionRestAPI;
 using InductionRestAPI.Interfaces;
 using NSubstitute;
@@ -24,8 +19,7 @@ namespace RestClient.Tests
             public void WhenCreatingTheObserver()
             {
                 _restAuthenticator = Substitute.For<IRestAuthenticator>();
-                _messageStatusChecker = new MessageStatusChecker("http://test.com", "/v1.0/messageheaders",
-                    _restAuthenticator);
+                _messageStatusChecker = new MessageStatusChecker("/v1.0/messageheaders", _restAuthenticator);
             }
 
             [Test]
@@ -47,17 +41,14 @@ namespace RestClient.Tests
             {
                 _restAuthenticator = Substitute.For<IRestAuthenticator>();
                 _restAuthenticator.IsAuthenticated.Returns(false);
-                _messageStatusChecker = new MessageStatusChecker("https://api.esendex.com", "/v1.0/messageheaders",
-                    _restAuthenticator);
-                var guid = Guid.NewGuid();
-                _result = _messageStatusChecker.CheckMessageStatus(guid);
+                _messageStatusChecker = new MessageStatusChecker("/v1.0/messageheaders", _restAuthenticator);
+                _result = _messageStatusChecker.Execute();
             }
-
 
             [Test]
             public void ThenAuthenticateIsCalled()
             {
-                _restAuthenticator.Received(1).Authenticate();
+                _restAuthenticator.Received(1).Execute();
             }
 
             [Test]
@@ -82,12 +73,16 @@ namespace RestClient.Tests
                 _restAuthenticator = new RestAuthenticator(apiBaseUrl, "/v1.0/session/constructor",
                     "Ronnie.Lawson+Induction@esendex.com", Utility.GetSecret("password"));
 
-                _messageSender = new MessageSender(apiBaseUrl, "/v1.0/messagedispatcher", _restAuthenticator);
-                _messageSender.SendMessage("07590360247", "Get Status Test Message", "EX0224195");
+                _messageSender = new MessageSender("/v1.0/messagedispatcher", _restAuthenticator)
+                {
+                    MessageToSend = new Message("07590360247", "Get Status Test Message"),
+                    AccountReference = "EX0224195"
+                };
+                
+                _messageSender.Execute();
 
-                _messageStatusChecker = new MessageStatusChecker(apiBaseUrl, $"/v1.0/messageheaders/{_messageSender.MessageSenderResponse.MessageHeader.Id}", _restAuthenticator);
-                var guid = Guid.NewGuid();
-                _result = _messageStatusChecker.CheckMessageStatus(guid);
+                _messageStatusChecker = new MessageStatusChecker($"/v1.0/messageheaders/{_messageSender.MessageSenderResponse.MessageHeader.Id}", _restAuthenticator);
+                _result = _messageStatusChecker.Execute();
             }
 
             [Test]

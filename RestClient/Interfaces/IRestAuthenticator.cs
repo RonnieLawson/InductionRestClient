@@ -7,7 +7,7 @@ namespace InductionRestAPI.Interfaces
     public interface IRestAuthenticator
     {
         bool IsAuthenticated { get; }
-        HttpStatusCode Authenticate();
+        HttpStatusCode Execute();
         string GetEncodedSession();
     }
 }

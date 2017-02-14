@@ -36,7 +36,7 @@ namespace RestClient.Tests
             {
                 var password = Utility.GetSecret("password");
                 _restAuthenticator = new RestAuthenticator("https://api.esendex.com", "/v1.0/session/constructor", "ronnie.lawson+induction@esendex.com", password);
-                _result = _restAuthenticator.Authenticate();
+                _result = _restAuthenticator.Execute();
             }
 
             [Test]
@@ -74,7 +74,7 @@ namespace RestClient.Tests
             public void WhenCallingGetAuthenticate()
             {
                 _restAuthenticator = new RestAuthenticator("https://api.esendex.com", "/v1.0/session/constructor", "ronnie.lawson+inductionIntegration@esendex.com", "wrongpassword");
-                _result = _restAuthenticator.Authenticate();
+                _result = _restAuthenticator.Execute();
             }
 
             [Test]
