@@ -61,10 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageInboxFetcherTests.cs" />
     <Compile Include="MessageSenderTests.cs" />
     <Compile Include="MessageStatusCheckerTests.cs" />
     <Compile Include="RestAuthenticatorTests.cs" />
-    <Compile Include="RestClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilityTests.cs" />
   </ItemGroup>

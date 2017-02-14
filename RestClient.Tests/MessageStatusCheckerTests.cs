@@ -81,7 +81,7 @@ namespace RestClient.Tests
                 
                 _messageSender.Execute();
 
-                _messageStatusChecker = new MessageStatusChecker($"/v1.0/messageheaders/{_messageSender.MessageSenderResponse.MessageHeader.Id}", _restAuthenticator);
+                _messageStatusChecker = new MessageStatusChecker($"/v1.0/messageheaders/{_messageSender.MessageSenderHeaders.MessageHeader.Id}", _restAuthenticator);
                 _result = _messageStatusChecker.Execute();
             }
 

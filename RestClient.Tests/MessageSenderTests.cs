@@ -89,19 +89,19 @@ namespace RestClient.Tests
             [Test]
             public void ThenTheResponseIsPopulated()
             {
-                Assert.That(_messageSender.MessageSenderResponse, Is.Not.Null);
+                Assert.That(_messageSender.MessageSenderHeaders, Is.Not.Null);
             }
 
             [Test]
             public void ThenTheBatchIdIsPopulated()
             {
-                Assert.That(_messageSender.MessageSenderResponse.BatchId, Is.Not.Null);
+                Assert.That(_messageSender.MessageSenderHeaders.BatchId, Is.Not.Null);
             }
 
             [Test]
             public void ThenTheMEssageHeaderIsPopulated()
             {
-                Assert.That(_messageSender.MessageSenderResponse.MessageHeader, Is.Not.Null);
+                Assert.That(_messageSender.MessageSenderHeaders.MessageHeader, Is.Not.Null);
             }
         }
     }

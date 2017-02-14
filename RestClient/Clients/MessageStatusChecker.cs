@@ -20,9 +20,13 @@ namespace InductionRestAPI
 
         public HttpStatusCode Execute()
         {
+            Authenticate();
+
+            var restClient = SetupClient();
+
             var request = SetupRequest(Method.GET, RequestResource);
 
-            var response = RestClient.Execute<MessageHeader>(request);
+            var response = restClient.Execute<MessageHeader>(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
                 MessageHeader = response.Data;

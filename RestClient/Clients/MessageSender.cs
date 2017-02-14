@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
@@ -12,7 +11,7 @@ namespace InductionRestAPI
 
         public Message MessageToSend { get; set; }
 
-        public SendMessageResponse MessageSenderResponse { get; private set; }
+        public MessageHeaders MessageSenderHeaders { get; private set; }
 
         public MessageSender(string requestResource, IRestAuthenticator authenticator)
         {
@@ -22,16 +21,18 @@ namespace InductionRestAPI
         }
         public HttpStatusCode Execute()
         {
+            Authenticate();
+
+            var restClient = SetupClient();
+
             var request = SetupRequest(Method.POST, RequestResource);
 
-            var sendMessageBody = new SendMessageBody(AccountReference, MessageToSend);
-            
-            request.AddBody(sendMessageBody);
+            request.AddBody(new SendMessageBody(AccountReference, MessageToSend));
 
-            var response = RestClient.Execute<SendMessageResponse>(request);
+            var response = restClient.Execute<MessageHeaders>(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
-                MessageSenderResponse = response.Data;
+                MessageSenderHeaders = response.Data;
             return response.StatusCode;
         }
     }

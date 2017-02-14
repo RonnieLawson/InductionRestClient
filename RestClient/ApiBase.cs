@@ -10,14 +10,9 @@ namespace InductionRestAPI
         protected IRestAuthenticator Authenticator;
         protected string RequestResource;
         protected Uri ApiBaseUri = new Uri("https://api.esendex.com");
-        protected RestClient RestClient;
 
         protected RestRequest SetupRequest(Method httpMethod, string resource)
         {
-            SetupClient();
-
-            Authenticate();
-
             var request = new RestRequest
             {
                 Method = httpMethod,
@@ -30,15 +25,15 @@ namespace InductionRestAPI
             return request;
         }
 
-        private void Authenticate()
+        protected void Authenticate()
         {
             if (!Authenticator.IsAuthenticated)
                 Authenticator.Execute();
         }
 
-        private void SetupClient()
-        {
-            RestClient = new RestClient
+        protected RestClient SetupClient()
+        {          
+            return new RestClient
             {
                 BaseUrl = ApiBaseUri
             };

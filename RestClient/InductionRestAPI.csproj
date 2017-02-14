@@ -47,17 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiBase.cs" />
-    <Compile Include="MessageStatusChecker.cs" />
+    <Compile Include="Clients\MessageInboxFetcher.cs" />
+    <Compile Include="Clients\MessageStatusChecker.cs" />
     <Compile Include="Models\MessageHeader.cs" />
     <Compile Include="Models\Message.cs" />
-    <Compile Include="MessageSender.cs" />
+    <Compile Include="Clients\MessageSender.cs" />
     <Compile Include="Models\AuthenticationResponse.cs" />
     <Compile Include="Interfaces\IRestAuthenticator.cs" />
-    <Compile Include="RestAuthenticator.cs" />
-    <Compile Include="RestAPIClient.cs" />
+    <Compile Include="Clients\RestAuthenticator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SendMessageBody.cs" />
-    <Compile Include="Models\SendMessageResponse.cs" />
+    <Compile Include="Models\MessageHeaders.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
