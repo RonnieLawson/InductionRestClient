@@ -1,15 +1,12 @@
-﻿using InductionRestAPI.Interfaces;
-using System.Net;
+﻿using System.Net;
+using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
 
-namespace InductionRestAPI
+namespace InductionRestAPI.Clients
 {
     public class MessageInboxFetcher : ApiBase
     {
-        private readonly string _resource;
-        private readonly IRestAuthenticator _restAuthenticator;
-
         public MessageHeaders MessageInboxHeaders { get; private set; }
 
         public MessageInboxFetcher(string resource, IRestAuthenticator restAuthenticator)
@@ -18,7 +15,7 @@ namespace InductionRestAPI
             Authenticator = restAuthenticator;
         }
 
-        public HttpStatusCode Execute()
+        public override HttpStatusCode Execute()
         {
             Authenticate();
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using InductionRestAPI;
+using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
@@ -93,6 +94,12 @@ namespace RestClient.Tests
                 public void ThenTheResponseIsPopulated()
                 {
                     Assert.That(_messageInboxFetcher.MessageInboxHeaders, Is.Not.Null);
+                }
+
+                [Test]
+                public void ThenTheFirstMessageHeaderIsPopulated()
+                {
+                    Assert.That(_messageInboxFetcher.MessageInboxHeaders.MessageHeader, Is.Not.Null);
                 }
             }
         }

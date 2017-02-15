@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
@@ -12,13 +13,13 @@ namespace InductionRestAPI
         public bool IsAuthenticated => SessionId != null;
         public Guid? SessionId { get; private set; }
 
-        private RestSharp.RestClient _restClient;
-        private string _requestResource;
+        private readonly RestClient _restClient;
+        private readonly string _requestResource;
 
         public RestAuthenticator(string apiBaseUri, string requestResource, string username, string password)
         {
             _requestResource = requestResource;
-            _restClient = new RestSharp.RestClient()
+            _restClient = new RestClient()
             {
                 Authenticator = new HttpBasicAuthenticator(username, password),
                 BaseUrl = new Uri(apiBaseUri)

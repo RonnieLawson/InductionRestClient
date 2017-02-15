@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using InductionRestAPI;
+using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
@@ -73,10 +74,9 @@ namespace RestClient.Tests
                 _restAuthenticator = new RestAuthenticator(apiBaseUrl, "/v1.0/session/constructor",
                     "Ronnie.Lawson+Induction@esendex.com", Utility.GetSecret("password"));
 
-                _messageSender = new MessageSender("/v1.0/messagedispatcher", _restAuthenticator)
+                _messageSender = new MessageSender("/v1.0/messagedispatcher", _restAuthenticator, "EX0224195")
                 {
                     MessageToSend = new Message("07590360247", "Get Status Test Message"),
-                    AccountReference = "EX0224195"
                 };
                 
                 _messageSender.Execute();

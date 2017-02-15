@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using InductionRestAPI;
+using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using NUnit.Framework;
 using NSubstitute;
@@ -13,49 +14,52 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenARestClient
         {
-            private RestAPIClient _restClient;
+            private RestApiClient _restClient;
 
             [OneTimeSetUp]
             public void WhenCreatingTheRestClient()
             {
-
-                _restClient = new RestAPIClient(new RestAuthenticator("http://test/.com", "", "", ""));
+                var restAuthenticator = new RestAuthenticator("http://test/.com", "", "", "");
+                _restClient = new RestApiClient(new MessageSender("", restAuthenticator, ""));
             }
 
             [Test]
             public void ThenTheClientIsCreated()
             {
-                Assert.That(_restClient.GetType(), Is.EqualTo(typeof(RestAPIClient)));
+                Assert.That(_restClient.GetType(), Is.EqualTo(typeof(RestApiClient)));
             }
         }
 
-      /*  [TestFixture]
-        public class GivenARestClientWithoutASession
+        [TestFixture]
+        public class GivenARestClientWithAMessageSender
         {
-            private RestAPIClient _client;
-            private HttpStatusCode _response;
+            private RestApiClient _client;
+            private HttpStatusCode _result;
+            private MessageSender _messageSender;
 
             [OneTimeSetUp]
             public void WhenCheckingCredentials()
             {
-                var restAuthenticator = Substitute.For<IRestAuthenticator>();
-                restAuthenticator.IsAuthenticated.Returns(true);
-                restAuthenticator.GetEncodedSession().Returns("abcdef");
+                _messageSender = Substitute.For<MessageSender>("endpoint", Substitute.For<IRestAuthenticator>(), "reference");
+                _messageSender.Execute().Returns(HttpStatusCode.OK);
 
-                _client = new RestAPIClient(restAuthenticator);
+                _client = new RestApiClient(_messageSender);
+                _result = _client.SendMessage("test client message", "07590360247");
             }
 
             [Test]
             public void ThenANewSessionIsCreated()
             {
-                Assert.That(_response, Is.EqualTo(HttpStatusCode.OK));
+                Assert.That(_result, Is.EqualTo(HttpStatusCode.OK));
             }
 
             [Test]
-            public void ThenTheSessionIdIsStored()
+            public void ThenExecuteIsCalledOnMessageSender()
             {
-                Assert.That(_client.SessionId, Is.Not.EqualTo(Guid.Empty));
+                _messageSender.Received(1).Execute();
             }
-        }*/
+
+
+        }
     }
 }

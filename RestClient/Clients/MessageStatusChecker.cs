@@ -3,7 +3,7 @@ using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
 
-namespace InductionRestAPI
+namespace InductionRestAPI.Clients
 {
     public class MessageStatusChecker: ApiBase
     {
@@ -18,7 +18,7 @@ namespace InductionRestAPI
             Authenticator = authenticator;
         }
 
-        public HttpStatusCode Execute()
+        public override HttpStatusCode Execute()
         {
             Authenticate();
 

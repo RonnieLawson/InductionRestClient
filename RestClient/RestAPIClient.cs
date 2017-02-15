@@ -1,29 +1,21 @@
-﻿using System;
-using System.Net;
-using InductionRestAPI.Interfaces;
+﻿using System.Net;
+using InductionRestAPI.Clients;
 
 namespace InductionRestAPI
 {
-    public class RestAPIClient
+    public class RestApiClient
     {
-        private readonly IRestAuthenticator _restAuthenticator;
+        private readonly MessageSender _messageSender;
 
-        public Guid SessionId
+        public RestApiClient(IApiBase messageSender)
         {
-            get { return _sessionId; }
-            set { _sessionId = value; }
+            _messageSender = (MessageSender) messageSender;
         }
 
-        private Guid _sessionId;
-
-        public RestAPIClient(IRestAuthenticator restAuthenticator)
+        public HttpStatusCode SendMessage(string phoneNumber, string messageText)
         {
-            _restAuthenticator = restAuthenticator;
-        }
-
-        public HttpWebResponse SendMessage()
-        {
-            throw new NotImplementedException();
+            _messageSender.MessageToSend = new Message(phoneNumber, messageText);
+            return _messageSender.Execute();
         }
     }
 }

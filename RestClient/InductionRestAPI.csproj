@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiBase.cs" />
+    <Compile Include="Clients\IApiBase.cs" />
     <Compile Include="Clients\MessageInboxFetcher.cs" />
     <Compile Include="Clients\MessageStatusChecker.cs" />
     <Compile Include="Models\MessageHeader.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SendMessageBody.cs" />
     <Compile Include="Models\MessageHeaders.cs" />
+    <Compile Include="RestAPIClient.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>

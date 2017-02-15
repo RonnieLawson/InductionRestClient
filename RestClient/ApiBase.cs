@@ -1,17 +1,19 @@
 using System;
+using System.Net;
+using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using RestSharp;
 using RestSharp.Serializers;
 
 namespace InductionRestAPI
 {
-    public class ApiBase
+    public abstract class ApiBase : IApiBase
     {
         protected IRestAuthenticator Authenticator;
         protected string RequestResource;
         protected Uri ApiBaseUri = new Uri("https://api.esendex.com");
 
-        protected RestRequest SetupRequest(Method httpMethod, string resource)
+        public RestRequest SetupRequest(Method httpMethod, string resource)
         {
             var request = new RestRequest
             {
@@ -25,18 +27,21 @@ namespace InductionRestAPI
             return request;
         }
 
-        protected void Authenticate()
+        public void Authenticate()
         {
             if (!Authenticator.IsAuthenticated)
                 Authenticator.Execute();
         }
 
-        protected RestClient SetupClient()
+        public RestClient SetupClient()
         {          
             return new RestClient
             {
                 BaseUrl = ApiBaseUri
             };
         }
+
+        public abstract HttpStatusCode Execute();
+
     }
 }

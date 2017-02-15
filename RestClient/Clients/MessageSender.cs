@@ -3,23 +3,24 @@ using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
 
-namespace InductionRestAPI
+namespace InductionRestAPI.Clients
 {
     public class MessageSender : ApiBase
     {
-        public string AccountReference { get; set; }
+        private readonly string _accountReference;
 
         public Message MessageToSend { get; set; }
 
         public MessageHeaders MessageSenderHeaders { get; private set; }
 
-        public MessageSender(string requestResource, IRestAuthenticator authenticator)
+        public MessageSender(string requestResource, IRestAuthenticator authenticator, string accountReference)
         {
+            _accountReference = accountReference;
             Authenticator = authenticator;
             RequestResource = requestResource;
 
         }
-        public HttpStatusCode Execute()
+        public override HttpStatusCode Execute()
         {
             Authenticate();
 
@@ -27,7 +28,7 @@ namespace InductionRestAPI
 
             var request = SetupRequest(Method.POST, RequestResource);
 
-            request.AddBody(new SendMessageBody(AccountReference, MessageToSend));
+            request.AddBody(new SendMessageBody(_accountReference, MessageToSend));
 
             var response = restClient.Execute<MessageHeaders>(request);
 
