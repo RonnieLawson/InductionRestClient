@@ -59,7 +59,7 @@ namespace RestClient.Tests
             }
         }
 
-        [TestFixture, Category("Costly")]
+        [TestFixture, Category("Costly"), Ignore("Costly")]
         public class GivenAMessageStatusCheckerWithValidCredentials
         {
             private MessageStatusChecker _messageStatusChecker;

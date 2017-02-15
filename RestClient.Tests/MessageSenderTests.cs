@@ -60,7 +60,7 @@ namespace RestClient.Tests
             }
         }
 
-        [TestFixture, Category("Costly")]
+        [TestFixture, Category("Costly"), Ignore("Costly")]
         public class GivenAMessageToSenWithValidCredentialsd
         {
             private IRestAuthenticator _restAuthenticator;
