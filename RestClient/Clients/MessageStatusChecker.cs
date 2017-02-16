@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
@@ -11,6 +12,7 @@ namespace InductionRestAPI.Clients
         public MessageHeader MessageHeader { get; private set; }
 
         public bool MessageStatusResponse { get; set; }
+        public string MessageHeaderId { get; set; }
 
         public MessageStatusChecker(string requestResource, IRestAuthenticator authenticator)
         {
@@ -24,7 +26,7 @@ namespace InductionRestAPI.Clients
 
             var restClient = SetupClient();
 
-            var request = SetupRequest(Method.GET, RequestResource);
+            var request = SetupRequest(Method.GET, RequestResource + MessageHeaderId.ToString());
 
             var response = restClient.Execute<MessageHeader>(request);
 

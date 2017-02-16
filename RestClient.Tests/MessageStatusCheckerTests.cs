@@ -4,6 +4,7 @@ using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
+using System;
 
 namespace RestClient.Tests
 {
@@ -42,8 +43,11 @@ namespace RestClient.Tests
             {
                 _restAuthenticator = Substitute.For<IRestAuthenticator>();
                 _restAuthenticator.IsAuthenticated.Returns(false);
-                _messageStatusChecker = new MessageStatusChecker("/v1.0/messageheaders", _restAuthenticator);
-                _result = _messageStatusChecker.Execute();
+                _messageStatusChecker = new MessageStatusChecker("/v1.0/messageheaders/", _restAuthenticator)
+                {
+                    MessageHeaderId = Guid.NewGuid().ToString()
+                };
+                _messageStatusChecker.Execute();
             }
 
             [Test]
@@ -81,7 +85,11 @@ namespace RestClient.Tests
                 
                 _messageSender.Execute();
 
-                _messageStatusChecker = new MessageStatusChecker($"/v1.0/messageheaders/{_messageSender.MessageSenderHeaders.MessageHeader.Id}", _restAuthenticator);
+                string messageHeaderID = _messageSender.MessageSenderHeaders.MessageHeader.Id.ToString();
+                _messageStatusChecker = new MessageStatusChecker($"/v1.0/messageheaders/", _restAuthenticator)
+                {
+                    MessageHeaderId = messageHeaderID
+                };
                 _result = _messageStatusChecker.Execute();
             }
 
