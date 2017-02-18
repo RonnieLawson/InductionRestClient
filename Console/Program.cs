@@ -63,10 +63,10 @@ namespace SMSConsole
                                 }
                             case "inbox":
                                 {
-                                    int parsedInboxNumber;
                                     int? inboxNumber = null;
                                     if (commands.Length > 1)
                                     {
+                                        int parsedInboxNumber;
                                         var isValidNumber = Int32.TryParse(commands[1], out parsedInboxNumber);
                                         if (!isValidNumber)
                                         {
