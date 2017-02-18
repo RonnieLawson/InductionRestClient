@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using InductionRestAPI.Clients;
-using System.IO;
-using System.Configuration;
 using InductionRestAPI.Models;
 
 namespace InductionRestAPI
@@ -13,15 +10,10 @@ namespace InductionRestAPI
         private readonly MessageSender _messageSender;
         private readonly MessageStatusChecker _messageStatusChecker;
         private readonly MessageInboxFetcher _messageInboxFetcher;
-        private object _lastSentHeader;
-        private static string _logDir;
+        private string _lastSentHeader;
 
         public RestApiClient(IApiBase messageSender, IApiBase messageStatusChecker, IApiBase messageInboxFetcher)
         {
-            _logDir = ConfigurationManager.AppSettings["LogDirectory"] ?? @"C:\Logs";
-
-
-
             _messageSender = (MessageSender) messageSender;
             _messageStatusChecker = (MessageStatusChecker)messageStatusChecker;
             _messageInboxFetcher = (MessageInboxFetcher)messageInboxFetcher;
@@ -46,6 +38,8 @@ namespace InductionRestAPI
 
         public HttpStatusCode CheckMessageStatus(string messageHeaderId)
         {
+            if (messageHeaderId == "last")
+                messageHeaderId = _lastSentHeader;
             WriteLine($"Checking Message Status: {messageHeaderId}");
 
             _messageStatusChecker.MessageHeaderId = messageHeaderId;
@@ -67,7 +61,7 @@ namespace InductionRestAPI
         public HttpStatusCode CheckInbox(int? messageNumber)
         {
             if(messageNumber == null)
-            WriteLine($"Checking Inbox for messages");
+            WriteLine("Checking Inbox for messages");
             var result = _messageInboxFetcher.Execute();
             DisplayMessageList(_messageInboxFetcher.MessageInboxResponse);
             return result;

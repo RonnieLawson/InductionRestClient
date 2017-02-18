@@ -2,28 +2,13 @@
 using System.Net;
 using System.Text;
 using InductionRestAPI;
-using InductionRestAPI.Models;
 using NUnit.Framework;
-using RestSharp;
-using RestSharp.Deserializers;
 
 namespace RestClient.Tests
 {
     [TestFixture]
     public class RestAuthenticatorTests
     {
-        [TestFixture]
-        public class GivenAnAuthenticator
-        {
-            private InductionRestAPI.RestAuthenticator _restAuthenticator;
-
-            [OneTimeSetUp]
-            public void WhenCreatingTheAuthenticator()
-            {
-                _restAuthenticator = new InductionRestAPI.RestAuthenticator("Http://nowhere.com", "", "anything", "anything");
-            }
-
-        }
 
         [TestFixture]
         public class GivenValidCredentials

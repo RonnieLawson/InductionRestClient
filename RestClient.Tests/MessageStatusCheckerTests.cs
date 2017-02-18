@@ -36,7 +36,6 @@ namespace RestClient.Tests
         {
             private MessageStatusChecker _messageStatusChecker;
             private IRestAuthenticator _restAuthenticator;
-            private HttpStatusCode _result;
 
             [OneTimeSetUp]
             public void WhenCallingGetStatus()
