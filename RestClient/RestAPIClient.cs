@@ -81,10 +81,15 @@ namespace InductionRestAPI
                 return;
             }
             WriteLine($"Inbox contains {messageInboxHeaders.TotalCount} Messages, Displaying {messageInboxHeaders.Count}:");
-            foreach (MessageHeader messageInboxHeader in messageInboxHeaders.MessageHeaders)
+            var headerNumber = 1;
+            foreach (var messageInboxHeader in messageInboxHeaders.MessageHeaders)
             {
-                
+                WriteLine("-------------------------");
+                   WriteLine($"Message {headerNumber}:");
+                WriteOutMessage(messageInboxHeader);
+                headerNumber++;
             }
+            WriteLine("-------------------------");
         }
 
         private void WriteOutMessage(MessageHeader messageHeader)

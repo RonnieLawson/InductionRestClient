@@ -88,15 +88,13 @@ namespace RestClient.Tests
                     Summary = "Test Summary"
                 };
 
-
-
                 _client = new RestApiClient(new MessageSender("", restAuthenticator, ""), 
                     _messageStatusChecker, new MessageInboxFetcher("", restAuthenticator));
                 _result = _client.CheckMessageStatus(Guid.NewGuid().ToString());
             }
 
             [Test]
-            public void ThenItReturnsOK()
+            public void ThenItReturnsOk()
             {
                 Assert.That(_result, Is.EqualTo(HttpStatusCode.OK));
             }

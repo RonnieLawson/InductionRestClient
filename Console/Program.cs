@@ -112,9 +112,6 @@ namespace SMSConsole
             Console.WriteLine($"Check Inbox: 'Inbox' to get a list of messages or 'Inbox [messagenumber]' to see a specific message ");
         }
 
-
-
-
         private static string BuildMessage(string[] commands)
         {
             var message = "";
