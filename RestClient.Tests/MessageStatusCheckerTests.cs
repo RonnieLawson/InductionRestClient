@@ -85,10 +85,10 @@ namespace RestClient.Tests
                 
                 _messageSender.Execute();
 
-                string messageHeaderID = _messageSender.MessageSenderHeaders.MessageHeader.Id.ToString();
+                var messageHeaderId = _messageSender.MessageSenderHeaders.MessageHeader.Id.ToString();
                 _messageStatusChecker = new MessageStatusChecker($"/v1.0/messageheaders/", _restAuthenticator)
                 {
-                    MessageHeaderId = messageHeaderID
+                    MessageHeaderId = messageHeaderId
                 };
                 _result = _messageStatusChecker.Execute();
             }

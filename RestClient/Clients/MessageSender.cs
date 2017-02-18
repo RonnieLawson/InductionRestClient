@@ -11,7 +11,7 @@ namespace InductionRestAPI.Clients
 
         public Message MessageToSend { get; set; }
 
-        public MessageHeaders MessageSenderHeaders { get; private set; }
+        public SentMessageHeaders MessageSenderHeaders { get; set; }
 
         public MessageSender(string requestResource, IRestAuthenticator authenticator, string accountReference)
         {
@@ -30,7 +30,7 @@ namespace InductionRestAPI.Clients
 
             request.AddBody(new SendMessageBody(_accountReference, MessageToSend));
 
-            var response = restClient.Execute<MessageHeaders>(request);
+            var response = restClient.Execute<SentMessageHeaders>(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
                 MessageSenderHeaders = response.Data;

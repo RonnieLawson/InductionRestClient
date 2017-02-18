@@ -32,7 +32,7 @@ namespace InductionRestAPI.Models
         public int Parts { get; set; }
 
         public string Username { get; set; }
- 
+
     }
 
     [DeserializeAs(Name = "body")]

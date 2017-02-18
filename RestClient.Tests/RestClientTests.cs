@@ -3,6 +3,7 @@ using System.Net;
 using InductionRestAPI;
 using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
+using InductionRestAPI.Models;
 using NUnit.Framework;
 using NSubstitute;
 
@@ -43,6 +44,8 @@ namespace RestClient.Tests
                 IRestAuthenticator restAuthenticator = Substitute.For<IRestAuthenticator>();
                 _messageSender = Substitute.For<MessageSender>("endpoint", restAuthenticator, "reference");
                 _messageSender.Execute().Returns(HttpStatusCode.OK);
+                var messageSenderHeaders = new SentMessageHeaders() {MessageHeader = new MessageHeader() {Id = Guid.NewGuid()} };
+                _messageSender.MessageSenderHeaders = messageSenderHeaders;
 
                 _client = new RestApiClient(_messageSender, new MessageStatusChecker("", restAuthenticator), 
                     new MessageInboxFetcher("", restAuthenticator));
@@ -75,6 +78,17 @@ namespace RestClient.Tests
                 IRestAuthenticator restAuthenticator = Substitute.For<IRestAuthenticator>();
                 _messageStatusChecker = Substitute.For<MessageStatusChecker>("endpoint", restAuthenticator);
                 _messageStatusChecker.Execute().Returns(HttpStatusCode.OK);
+                _messageStatusChecker.MessageHeader = new MessageHeader()
+                {
+                    Id = Guid.NewGuid(),
+                    Status = "TestStatus",
+                    Direction = "Test Direction",
+                    From = new PhoneNumber() {Value = "01234567980"},
+                    To = new PhoneNumber() {Value = "9876543210"},
+                    Summary = "Test Summary"
+                };
+
+
 
                 _client = new RestApiClient(new MessageSender("", restAuthenticator, ""), 
                     _messageStatusChecker, new MessageInboxFetcher("", restAuthenticator));
@@ -110,7 +124,7 @@ namespace RestClient.Tests
 
                 _client = new RestApiClient(new MessageSender("", restAuthenticator, ""),
                     new MessageStatusChecker("", restAuthenticator), _messageInboxFetcher);
-                _result = _client.CheckInbox();
+                _result = _client.CheckInbox(null);
             }
 
             [Test]

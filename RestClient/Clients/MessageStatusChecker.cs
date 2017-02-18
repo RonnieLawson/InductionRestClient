@@ -9,7 +9,7 @@ namespace InductionRestAPI.Clients
     public class MessageStatusChecker: ApiBase
     {
 
-        public MessageHeader MessageHeader { get; private set; }
+        public MessageHeader MessageHeader { get; set; }
 
         public bool MessageStatusResponse { get; set; }
         public string MessageHeaderId { get; set; }

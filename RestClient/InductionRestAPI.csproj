@@ -56,9 +56,10 @@
     <Compile Include="Models\AuthenticationResponse.cs" />
     <Compile Include="Interfaces\IRestAuthenticator.cs" />
     <Compile Include="Clients\RestAuthenticator.cs" />
+    <Compile Include="Models\SentMessageHeaders.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\SendMessageBody.cs" />
-    <Compile Include="Models\MessageHeaders.cs" />
+    <Compile Include="Models\MessageInboxResponse.cs" />
     <Compile Include="RestAPIClient.cs" />
     <Compile Include="Utility.cs" />
   </ItemGroup>

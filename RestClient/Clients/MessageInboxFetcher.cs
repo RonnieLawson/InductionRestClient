@@ -7,7 +7,7 @@ namespace InductionRestAPI.Clients
 {
     public class MessageInboxFetcher : ApiBase
     {
-        public MessageHeaders MessageInboxHeaders { get; private set; }
+        public MessageInboxResponse MessageInboxResponse { get; private set; }
 
         public MessageInboxFetcher(string resource, IRestAuthenticator restAuthenticator)
         {
@@ -23,10 +23,10 @@ namespace InductionRestAPI.Clients
 
             var request = SetupRequest(Method.GET, RequestResource);
 
-            var response = restClient.Execute<MessageHeaders>(request);
+            var response = restClient.Execute<MessageInboxResponse>(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
-                MessageInboxHeaders = response.Data;
+                MessageInboxResponse = response.Data;
 
             return response.StatusCode;
         }
