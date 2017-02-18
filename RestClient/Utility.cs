@@ -31,7 +31,7 @@ namespace InductionRestAPI
                 Directory.CreateDirectory(loggingDirectory);
             }
 
-            using (var writer = File.CreateText($"{loggingDirectory}{GenerateTimestamp()}.log"))
+            using (var writer = File.AppendText($"{loggingDirectory}{GenerateTimestamp()}.log"))
             {
                 writer.WriteLine(logMessage);
             }

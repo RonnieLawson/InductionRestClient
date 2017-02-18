@@ -4,6 +4,7 @@ using InductionRestAPI.Models;
 using System;
 using System.Configuration;
 using System.IO;
+using static System.Int32;
 
 namespace SMSConsole
 {
@@ -34,7 +35,6 @@ namespace SMSConsole
             MessageInboxFetcher messageInboxFetcher = new MessageInboxFetcher(MessageInboxEndpoint, authenticator);
 
             _restClient = new RestApiClient(messageSender, messageStatusChecker, messageInboxFetcher);
-
 
             var command = "";
             ShowHelpText();
@@ -67,7 +67,7 @@ namespace SMSConsole
                                     if (commands.Length > 1)
                                     {
                                         int parsedInboxNumber;
-                                        var isValidNumber = Int32.TryParse(commands[1], out parsedInboxNumber);
+                                        var isValidNumber = TryParse(commands[1], out parsedInboxNumber);
                                         if (!isValidNumber)
                                         {
                                             _restClient.WriteLine($"Error! {commands[1]} is not a valid message number!" );

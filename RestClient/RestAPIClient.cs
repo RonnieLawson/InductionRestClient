@@ -103,7 +103,7 @@ namespace InductionRestAPI
         }
 
 
-        public void WriteLine(string message)
+        public virtual void WriteLine(string message)
         {
             string TimestampedMessage = Utility.AddTimestampTo(message);
             Utility.Log(TimestampedMessage);
