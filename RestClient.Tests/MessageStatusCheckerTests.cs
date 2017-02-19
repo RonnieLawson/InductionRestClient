@@ -1,11 +1,11 @@
 ﻿using System.Net;
-using InductionRestAPI;
-using InductionRestAPI.Clients;
-using InductionRestAPI.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 using System;
-using InductionRestAPI.Models;
+using CommonUtils;
+using RestClient.Clients;
+using RestClient.Interfaces;
+using RestClient.Models;
 
 namespace RestClient.Tests
 {
@@ -63,7 +63,7 @@ namespace RestClient.Tests
             }
         }
 
-        [TestFixture, Category("Costly"), Ignore("Costly")]
+        [TestFixture, Category("Costly")]
         public class GivenAMessageStatusCheckerWithValidCredentials
         {
             private MessageStatusChecker _messageStatusChecker;

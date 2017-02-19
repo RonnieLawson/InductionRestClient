@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace InductionRestAPI.Models
+namespace RestClient.Models
 {
     [XmlRoot("message")]
     public class Message

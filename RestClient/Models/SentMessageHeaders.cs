@@ -1,7 +1,7 @@
 ﻿using System;
 using RestSharp.Deserializers;
 
-namespace InductionRestAPI.Models
+namespace RestClient.Models
 {
     [DeserializeAs(Name = "messageheaders")]
     public class SentMessageHeaders

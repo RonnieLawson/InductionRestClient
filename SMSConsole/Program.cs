@@ -1,14 +1,15 @@
-﻿using InductionRestAPI;
-using InductionRestAPI.Clients;
-using System;
+﻿using System;
 using System.Configuration;
+using CommonUtils;
+using RestClient;
+using RestClient.Clients;
 using static System.Int32;
 
 namespace SMSConsole
 {
     internal class Program
     {
-        private static RestApiClient _restClient;
+        private static Client _restClient;
 
         static void Main(string[] args)
         {
@@ -30,7 +31,7 @@ namespace SMSConsole
             var messageStatusChecker = new MessageStatusChecker(messageStatusEndpoint, authenticator);
             var messageInboxFetcher = new MessageInboxFetcher(messageInboxEndpoint, authenticator);
 
-            _restClient = new RestApiClient(messageSender, messageStatusChecker, messageInboxFetcher);
+            _restClient = new Client(messageSender, messageStatusChecker, messageInboxFetcher);
 
             var command = "";
             _restClient.WriteLine("Started SMS Console!");

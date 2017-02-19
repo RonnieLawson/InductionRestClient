@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Net;
-using InductionRestAPI;
-using InductionRestAPI.Clients;
-using InductionRestAPI.Interfaces;
-using InductionRestAPI.Models;
 using NUnit.Framework;
 using NSubstitute;
+using RestClient.Clients;
+using RestClient.Interfaces;
+using RestClient.Models;
 
 namespace RestClient.Tests
 {
@@ -15,26 +14,26 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenARestClient
         {
-            private RestApiClient _restClient;
+            private Client _restClient;
 
             [OneTimeSetUp]
             public void WhenCreatingTheRestClient()
             {
                 var restAuthenticator = new RestAuthenticator("http://test/.com", "", "", "");
-                _restClient = new RestApiClient(new MessageSender("", restAuthenticator, ""), new MessageStatusChecker("", restAuthenticator), new MessageInboxFetcher("", restAuthenticator));
+                _restClient = new Client(new MessageSender("", restAuthenticator, ""), new MessageStatusChecker("", restAuthenticator), new MessageInboxFetcher("", restAuthenticator));
             }
 
             [Test]
             public void ThenTheClientIsCreated()
             {
-                Assert.That(_restClient.GetType(), Is.EqualTo(typeof(RestApiClient)));
+                Assert.That(_restClient.GetType(), Is.EqualTo(typeof(Client)));
             }
         }
 
         [TestFixture]
         public class GivenARestClientWithAMessageSender
         {
-            private RestApiClient _client;
+            private Client _client;
             private HttpStatusCode _result;
             private MessageSender _messageSender;
 
@@ -47,7 +46,7 @@ namespace RestClient.Tests
                 var messageSenderHeaders = new SentMessageHeaders() {MessageHeader = new MessageHeader() {Id = Guid.NewGuid()} };
                 _messageSender.MessageSenderHeaders = messageSenderHeaders;
 
-                _client = new RestApiClient(_messageSender, new MessageStatusChecker("", restAuthenticator), 
+                _client = new Client(_messageSender, new MessageStatusChecker("", restAuthenticator), 
                     new MessageInboxFetcher("", restAuthenticator));
                 _result = _client.SendMessage("test client message", "07590360247");
             }
@@ -68,7 +67,7 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenARestClientWithAMessageStatusChecker
         {
-            private RestApiClient _client;
+            private Client _client;
             private HttpStatusCode _result;
             private MessageStatusChecker _messageStatusChecker;
 
@@ -88,7 +87,7 @@ namespace RestClient.Tests
                     Summary = "Test Summary"
                 };
 
-                _client = new RestApiClient(new MessageSender("", restAuthenticator, ""), 
+                _client = new Client(new MessageSender("", restAuthenticator, ""), 
                     _messageStatusChecker, new MessageInboxFetcher("", restAuthenticator));
                 _result = _client.CheckMessageStatus(Guid.NewGuid().ToString());
             }
@@ -109,7 +108,7 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenARestClientWithAMessageInboxFetcher
         {
-            private RestApiClient _client;
+            private Client _client;
             private HttpStatusCode _result;
             private MessageInboxFetcher _messageInboxFetcher;
 
@@ -120,7 +119,7 @@ namespace RestClient.Tests
                 _messageInboxFetcher = Substitute.For<MessageInboxFetcher>("endpoint", restAuthenticator);
                 _messageInboxFetcher.Execute().Returns(HttpStatusCode.OK);
 
-                _client = new RestApiClient(new MessageSender("", restAuthenticator, ""),
+                _client = new Client(new MessageSender("", restAuthenticator, ""),
                     new MessageStatusChecker("", restAuthenticator), _messageInboxFetcher);
                 _result = _client.CheckInbox(null);
             }

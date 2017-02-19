@@ -1,10 +1,10 @@
 ﻿using System.Net;
-using InductionRestAPI;
-using InductionRestAPI.Clients;
-using InductionRestAPI.Interfaces;
-using InductionRestAPI.Models;
+using CommonUtils;
 using NSubstitute;
 using NUnit.Framework;
+using RestClient.Clients;
+using RestClient.Interfaces;
+using RestClient.Models;
 using RestSharp;
 using RestSharp.Deserializers;
 

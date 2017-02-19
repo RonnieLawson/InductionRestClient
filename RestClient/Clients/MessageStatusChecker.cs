@@ -1,13 +1,12 @@
 ﻿using System.Net;
-using InductionRestAPI.Interfaces;
-using InductionRestAPI.Models;
+using RestClient.Interfaces;
+using RestClient.Models;
 using RestSharp;
 
-namespace InductionRestAPI.Clients
+namespace RestClient.Clients
 {
     public class MessageStatusChecker: ApiBase
     {
-
         public MessageHeader MessageHeader { get; set; }
 
         public bool MessageStatusResponse { get; set; }

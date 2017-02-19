@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Net;
-using InductionRestAPI.Clients;
-using InductionRestAPI.Models;
+using CommonUtils;
+using RestClient.Clients;
+using RestClient.Models;
 
-namespace InductionRestAPI
+namespace RestClient
 {
-    public class RestApiClient
+    public class Client
     {
         private readonly MessageSender _messageSender;
         private readonly MessageStatusChecker _messageStatusChecker;
         private readonly MessageInboxFetcher _messageInboxFetcher;
         private string _lastSentHeader;
 
-        public RestApiClient(IApiBase messageSender, IApiBase messageStatusChecker, IApiBase messageInboxFetcher)
+        public Client(IApiBase messageSender, IApiBase messageStatusChecker, IApiBase messageInboxFetcher)
         {
             _messageSender = (MessageSender) messageSender;
             _messageStatusChecker = (MessageStatusChecker)messageStatusChecker;

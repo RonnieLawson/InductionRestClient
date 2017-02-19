@@ -1,8 +1,6 @@
-﻿using System;
-using System.Net;
-using RestSharp;
+﻿using System.Net;
 
-namespace InductionRestAPI.Interfaces
+namespace RestClient.Interfaces
 {
     public interface IRestAuthenticator
     {

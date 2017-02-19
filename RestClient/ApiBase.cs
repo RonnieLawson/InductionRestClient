@@ -1,11 +1,11 @@
 using System;
 using System.Net;
-using InductionRestAPI.Clients;
-using InductionRestAPI.Interfaces;
+using RestClient.Clients;
+using RestClient.Interfaces;
 using RestSharp;
 using RestSharp.Serializers;
 
-namespace InductionRestAPI
+namespace RestClient
 {
     public abstract class ApiBase : IApiBase
     {
@@ -33,9 +33,9 @@ namespace InductionRestAPI
                 Authenticator.Execute();
         }
 
-        public RestClient SetupClient()
+        public RestSharp.RestClient SetupClient()
         {          
-            return new RestClient
+            return new RestSharp.RestClient
             {
                 BaseUrl = ApiBaseUri
             };

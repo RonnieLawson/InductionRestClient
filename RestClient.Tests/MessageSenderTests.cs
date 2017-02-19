@@ -1,10 +1,10 @@
 ﻿using System.Net;
-using InductionRestAPI;
-using InductionRestAPI.Clients;
-using InductionRestAPI.Interfaces;
-using InductionRestAPI.Models;
+using CommonUtils;
 using NSubstitute;
 using NUnit.Framework;
+using RestClient.Clients;
+using RestClient.Interfaces;
+using RestClient.Models;
 
 namespace RestClient.Tests
 {
@@ -61,7 +61,7 @@ namespace RestClient.Tests
             }
         }
 
-        [TestFixture, Category("Costly"), Ignore("Costly")]
+        [TestFixture, Category("Costly")]
         public class GivenAMessageToSenWithValidCredentialsd
         {
             private IRestAuthenticator _restAuthenticator;

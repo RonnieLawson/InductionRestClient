@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using InductionRestAPI;
-using InductionRestAPI.Clients;
+using CommonUtils;
 using NUnit.Framework;
+using RestClient.Clients;
 
 namespace RestClient.Tests
 {
