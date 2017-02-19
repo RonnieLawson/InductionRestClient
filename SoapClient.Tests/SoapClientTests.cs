@@ -1,4 +1,5 @@
 ﻿using System;
+using CommonUtils;
 using NUnit.Framework;
 using SOAPClient;
 
@@ -10,18 +11,18 @@ namespace SoapClient.Tests
         [TestFixture]
         public class GivenASoapMessageSender
         {
-            private EsendexSoapClient _soapMessageSender;
+            private EsendexSoapClient _soapClient;
 
             [OneTimeSetUp]
             public void WhenCreatingTheObject()
             {
-                _soapMessageSender = new EsendexSoapClient();
+                _soapClient = new EsendexSoapClient("EX0224195", "ronnie.lawson+induction@esendex.com", Utility.GetSecret("password"));
             }
 
             [Test]
             public void ThenTheRightObjectIsCreated()
             {
-                Assert.That(_soapMessageSender.GetType(), Is.EqualTo(typeof(EsendexSoapClient)));
+                Assert.That(_soapClient.GetType(), Is.EqualTo(typeof(EsendexSoapClient)));
             }
         }
 
@@ -33,8 +34,8 @@ namespace SoapClient.Tests
             [OneTimeSetUp]
             public void WhenCallingSendMessage()
             {
-                var soapMessageSender = new EsendexSoapClient();
-                _result = soapMessageSender.SendMessage("test client message");
+                var esendexSoapClient = new EsendexSoapClient("EX0224195", "ronnie.lawson+induction@esendex.com", Utility.GetSecret("password"));
+                _result = esendexSoapClient.SendMessage("07590360247","test client message");
             }
 
             [Test]

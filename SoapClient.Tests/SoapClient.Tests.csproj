@@ -52,6 +52,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonUtils\CommonUtils.csproj">
+      <Project>{F235D9FC-67F3-4E2E-AFD9-9E3E5C0092E7}</Project>
+      <Name>CommonUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SOAPClient\SOAPClient.csproj">
       <Project>{1f7bfe06-7dc6-4d57-bb25-9694097b4c34}</Project>
       <Name>SOAPClient</Name>

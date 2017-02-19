@@ -39,7 +39,7 @@ namespace SMSConsole
             while (command != "exit")
             {
                 command = Console.ReadLine();
-                Utility.Log(Utility.AddTimestampTo($"Command: {command}"));
+                CommonUtils.Utility.Log(CommonUtils.Utility.AddTimestampTo($"Command: {command}"));
 
                 if (string.IsNullOrEmpty(command))
                     continue;

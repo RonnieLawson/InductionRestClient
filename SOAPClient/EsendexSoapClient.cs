@@ -5,17 +5,30 @@ namespace SOAPClient
 {
     public class EsendexSoapClient
     {
-        public string SendMessage(string message)
+        private string _accountReference;
+        private string _username;
+        private string _password;
+
+        public EsendexSoapClient(string accountReference, string username, string password)
+        {
+            _accountReference = accountReference;
+            _username = username;
+            _password = password;
+        }
+
+        public string SendMessage(string sendTo, string message)
         {
             var client = new SendServiceSoapClient();
+
+
             var messengerHeader = new MessengerHeader
             {
-                Account = "EX0224195",
-                Username = "ronnie.lawson+induction@esendex.com",
-                Password = Utility.GetSecret("password")
+                Account = _accountReference,
+                Username = _username,
+                Password = _password
             };
             
-            var result = client.SendMessage(messengerHeader, "07590360247", message, MessageType.Text);
+            var result = client.SendMessage(messengerHeader, sendTo, message, MessageType.Text);
             return result;
         }
     }
