@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using InductionRestAPI;
+using InductionRestAPI.Clients;
 using NUnit.Framework;
 
 namespace RestClient.Tests
@@ -13,7 +14,7 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenValidCredentials
         {
-            private InductionRestAPI.RestAuthenticator _restAuthenticator;
+            private RestAuthenticator _restAuthenticator;
             private HttpStatusCode _result;
 
             [OneTimeSetUp]
@@ -25,7 +26,7 @@ namespace RestClient.Tests
             }
 
             [Test]
-            public void ThenTheServiceReturnsOK()
+            public void ThenTheServiceReturnsOk()
             {
                 Assert.That(_result, Is.EqualTo(HttpStatusCode.OK));
             }
@@ -37,7 +38,7 @@ namespace RestClient.Tests
             }
 
             [Test]
-            public void ThenSessionIDIsStored()
+            public void ThenSessionIdIsStored()
             {
                 Assert.That(_restAuthenticator.SessionId, Is.Not.Null);
             }
@@ -52,7 +53,7 @@ namespace RestClient.Tests
         [TestFixture]
         public class GivenInvalidCredentials
         {
-            private InductionRestAPI.RestAuthenticator _restAuthenticator;
+            private RestAuthenticator _restAuthenticator;
             private HttpStatusCode _result;
 
             [OneTimeSetUp]

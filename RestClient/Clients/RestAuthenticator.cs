@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Net;
-using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 
-namespace InductionRestAPI
+namespace InductionRestAPI.Clients
 {
     public class RestAuthenticator : IRestAuthenticator
     {

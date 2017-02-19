@@ -5,11 +5,12 @@ using InductionRestAPI.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 using System;
+using InductionRestAPI.Models;
 
 namespace RestClient.Tests
 {
     [TestFixture]
-    class MessageStatusCheckerTests
+    internal class MessageStatusCheckerTests
     {
         [TestFixture]
         public class GivenAMessageStatusChecker

@@ -1,16 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Net;
 using InductionRestAPI;
 using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using NSubstitute;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using RestSharp;
 using RestSharp.Deserializers;
-using RestSharp.Serializers;
 
 namespace RestClient.Tests
 {

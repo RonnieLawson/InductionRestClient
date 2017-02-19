@@ -2,6 +2,7 @@
 using InductionRestAPI;
 using InductionRestAPI.Clients;
 using InductionRestAPI.Interfaces;
+using InductionRestAPI.Models;
 using NSubstitute;
 using NUnit.Framework;
 

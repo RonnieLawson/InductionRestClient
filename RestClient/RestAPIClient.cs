@@ -96,17 +96,11 @@ namespace InductionRestAPI
             WriteLine($"Summary: {messageHeader.Summary}");
         }
 
-
         public virtual void WriteLine(string message)
         {
-            string TimestampedMessage = Utility.AddTimestampTo(message);
-            Utility.Log(TimestampedMessage);
-            Console.WriteLine(TimestampedMessage);
+            var timestampedMessage = Utility.AddTimestampTo(message);
+            Utility.Log(timestampedMessage);
+            Console.WriteLine(timestampedMessage);
         }
-
-
-
-
-
     }
 }

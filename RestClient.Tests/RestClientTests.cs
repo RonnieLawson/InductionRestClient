@@ -53,7 +53,7 @@ namespace RestClient.Tests
             }
 
             [Test]
-            public void ThenItReturnsOK()
+            public void ThenItReturnsOk()
             {
                 Assert.That(_result, Is.EqualTo(HttpStatusCode.OK));
             }
@@ -126,7 +126,7 @@ namespace RestClient.Tests
             }
 
             [Test]
-            public void ThenItReturnsOK()
+            public void ThenItReturnsOk()
             {
                 Assert.That(_result, Is.EqualTo(HttpStatusCode.OK));
             }

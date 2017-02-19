@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using InductionRestAPI.Interfaces;
 using InductionRestAPI.Models;
 using RestSharp;
@@ -26,7 +25,7 @@ namespace InductionRestAPI.Clients
 
             var restClient = SetupClient();
 
-            var request = SetupRequest(Method.GET, RequestResource + MessageHeaderId.ToString());
+            var request = SetupRequest(Method.GET, RequestResource + MessageHeaderId);
 
             var response = restClient.Execute<MessageHeader>(request);
 
