@@ -1,5 +1,4 @@
-﻿using CommonUtils;
-using SOAPClient.EsendexSoapService;
+﻿using SOAPClient.EsendexSoapService;
 
 namespace SOAPClient
 {
@@ -19,7 +18,6 @@ namespace SOAPClient
         public string SendMessage(string sendTo, string message)
         {
             var client = new SendServiceSoapClient();
-
 
             var messengerHeader = new MessengerHeader
             {

@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoapClient.Tests", "SoapCli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonUtils", "CommonUtils\CommonUtils.csproj", "{F235D9FC-67F3-4E2E-AFD9-9E3E5C0092E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormPostClient", "FormPostClient\FormPostClient.csproj", "{A1786D85-74CD-42E8-BF57-A2B513053AF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormPostClient.Tests", "FormPostClient.Tests\FormPostClient.Tests.csproj", "{3D4013D5-CD03-47A9-BC57-C79C3DF43437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{F235D9FC-67F3-4E2E-AFD9-9E3E5C0092E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F235D9FC-67F3-4E2E-AFD9-9E3E5C0092E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F235D9FC-67F3-4E2E-AFD9-9E3E5C0092E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1786D85-74CD-42E8-BF57-A2B513053AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1786D85-74CD-42E8-BF57-A2B513053AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1786D85-74CD-42E8-BF57-A2B513053AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1786D85-74CD-42E8-BF57-A2B513053AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D4013D5-CD03-47A9-BC57-C79C3DF43437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D4013D5-CD03-47A9-BC57-C79C3DF43437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D4013D5-CD03-47A9-BC57-C79C3DF43437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D4013D5-CD03-47A9-BC57-C79C3DF43437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
