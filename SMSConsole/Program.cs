@@ -3,13 +3,14 @@ using System.Configuration;
 using CommonUtils;
 using RestClient;
 using RestClient.Clients;
-using static System.Int32;
+using RestClient.Interfaces;
 
 namespace SMSConsole
 {
     internal class Program
     {
         private static Client _restClient;
+        private static IDisplay _display = new ConsoleDisplay();
 
         static void Main(string[] args)
         {
@@ -31,15 +32,15 @@ namespace SMSConsole
             var messageStatusChecker = new MessageStatusChecker(messageStatusEndpoint, authenticator);
             var messageInboxFetcher = new MessageInboxFetcher(messageInboxEndpoint, authenticator);
 
-            _restClient = new Client(messageSender, messageStatusChecker, messageInboxFetcher);
+            _restClient = new Client(messageSender, messageStatusChecker, messageInboxFetcher, _display);
 
             var command = "";
-            _restClient.WriteLine("Started SMS Console!");
+            _display.WriteLine("Started SMS Console!");
             ShowHelpText();
             while (command != "exit")
             {
                 command = Console.ReadLine();
-                CommonUtils.Utility.Log(CommonUtils.Utility.AddTimestampTo($"Command: {command}"));
+                Utility.Log(Utility.AddTimestampTo($"Command: {command}"));
 
                 if (string.IsNullOrEmpty(command))
                     continue;
@@ -61,22 +62,7 @@ namespace SMSConsole
                         }
                         case "inbox":
                         {
-                            int? inboxNumber = null;
-                            if (commands.Length > 1)
-                            {
-                                int parsedInboxNumber;
-                                var isValidNumber = TryParse(commands[1], out parsedInboxNumber);
-                                if (!isValidNumber)
-                                {
-                                    _restClient.WriteLine($"Error! {commands[1]} is not a valid message number!");
-                                }
-                                else
-                                {
-                                    inboxNumber = parsedInboxNumber;
-                                }
-                            }
-
-                            _restClient.CheckInbox(inboxNumber);
+                            _restClient.CheckInbox();
                             break;
                         }
                         default:
@@ -88,21 +74,21 @@ namespace SMSConsole
                 }
                 catch (Exception ex)
                 {
-                    _restClient.WriteLine(ex.Message);
-                    _restClient.WriteLine(ex.StackTrace);
+                    _display.WriteLine(ex.Message);
+                    _display.WriteLine(ex.StackTrace);
                 }
             }
-            _restClient.WriteLine("Exiting");
+            _display.WriteLine("Exiting");
         }
 
         private static void ShowHelpText()
         {
-            Console.WriteLine("Usage: (replace bracketed words with your values)");
-            Console.WriteLine("Send message: 'Send [phonenumber] [message]'");
-            Console.WriteLine(
+            _display.WriteLine("Usage: (replace bracketed words with your values)");
+            _display.WriteLine("Send message: 'Send [phonenumber] [message]'");
+            _display.WriteLine(
                 "Check message: \'Check [messageID]\' or \'Check Last\' to see details of the last sent message");
-            Console.WriteLine(
-                "Check Inbox: \'Inbox\' to get a list of messages or \'Inbox [messagenumber]\' to see a specific message ");
+            _display.WriteLine("Check Inbox: \'Inbox\' to get a list of messages");
+            //" or \'Inbox [messagenumber]\' to see a specific message ");
         }
 
         private static string BuildMessage(string[] commands)

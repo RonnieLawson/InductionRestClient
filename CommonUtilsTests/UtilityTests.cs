@@ -1,7 +1,6 @@
-﻿using CommonUtils;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace RestClient.Tests
+namespace CommonUtils.Tests
 {
     [TestFixture]
     public class GivenAString

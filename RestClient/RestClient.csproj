@@ -50,6 +50,7 @@
     <Compile Include="Clients\IApiBase.cs" />
     <Compile Include="Clients\MessageInboxFetcher.cs" />
     <Compile Include="Clients\MessageStatusChecker.cs" />
+    <Compile Include="Interfaces\IDisplay.cs" />
     <Compile Include="Models\MessageHeader.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Clients\MessageSender.cs" />

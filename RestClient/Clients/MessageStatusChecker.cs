@@ -24,7 +24,7 @@ namespace RestClient.Clients
 
             var restClient = SetupClient();
 
-            var request = SetupRequest(Method.GET, RequestResource + MessageHeaderId);
+            var request = SetupRequest(Method.GET, $"{RequestResource}/{MessageHeaderId}");
 
             var response = restClient.Execute<MessageHeader>(request);
 

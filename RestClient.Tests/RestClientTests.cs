@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Moq;
 using NUnit.Framework;
 using NSubstitute;
 using RestClient.Clients;
@@ -20,7 +21,7 @@ namespace RestClient.Tests
             public void WhenCreatingTheRestClient()
             {
                 var restAuthenticator = new RestAuthenticator("http://test/.com", "", "", "");
-                _restClient = new Client(new MessageSender("", restAuthenticator, ""), new MessageStatusChecker("", restAuthenticator), new MessageInboxFetcher("", restAuthenticator));
+                _restClient = new Client(new MessageSender("", restAuthenticator, ""), new MessageStatusChecker("", restAuthenticator), new MessageInboxFetcher("", restAuthenticator), new Mock<IDisplay>().Object);
             }
 
             [Test]
@@ -47,7 +48,7 @@ namespace RestClient.Tests
                 _messageSender.MessageSenderHeaders = messageSenderHeaders;
 
                 _client = new Client(_messageSender, new MessageStatusChecker("", restAuthenticator), 
-                    new MessageInboxFetcher("", restAuthenticator));
+                    new MessageInboxFetcher("", restAuthenticator), new Mock<IDisplay>().Object);
                 _result = _client.SendMessage("test client message", "07590360247");
             }
 
@@ -88,7 +89,7 @@ namespace RestClient.Tests
                 };
 
                 _client = new Client(new MessageSender("", restAuthenticator, ""), 
-                    _messageStatusChecker, new MessageInboxFetcher("", restAuthenticator));
+                    _messageStatusChecker, new MessageInboxFetcher("", restAuthenticator), new Mock<IDisplay>().Object);
                 _result = _client.CheckMessageStatus(Guid.NewGuid().ToString());
             }
 
@@ -120,8 +121,8 @@ namespace RestClient.Tests
                 _messageInboxFetcher.Execute().Returns(HttpStatusCode.OK);
 
                 _client = new Client(new MessageSender("", restAuthenticator, ""),
-                    new MessageStatusChecker("", restAuthenticator), _messageInboxFetcher);
-                _result = _client.CheckInbox(null);
+                    new MessageStatusChecker("", restAuthenticator), _messageInboxFetcher, new Mock<IDisplay>().Object);
+                _result = _client.CheckInbox();
             }
 
             [Test]
